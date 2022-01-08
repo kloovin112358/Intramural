@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'core',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'im'
 ]
 
@@ -87,23 +88,30 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'app.wsgi.application'
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'intramural',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
 
+WSGI_APPLICATION = 'app.wsgi.application'
+
+# database info in the JSON file is in the following format:
+# {
+#     "ENGINE": "django.db.backends.postgresql_psycopg2",
+#     "NAME": "db_name",
+#     "USER": "db_user",
+#     "PASSWORD": "db_password",
+#     "HOST": "localhost",
+#     "PORT": "db_port"
+# }
+DATABASES = {
+    'default': get_secret('database_info')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

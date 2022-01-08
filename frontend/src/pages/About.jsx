@@ -1,51 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import Button from 'react-bootstrap/Button'
-import Newsfeed from '../components/Newsfeed'
-import Weather from '../components/Weather'
-
-// use recoil if you want global state variables
-
-// use state when you want to change the value of an object you are rendering
+import React from 'react';
+import Container from 'react-bootstrap/Container'
 
 const About = () => {
-    // beans is stateful, initial value set to 5
-    const [beans, setBeans] = useState(5);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(()=>{
-        let mounted = true;
-        if(beans > 10 && mounted) {
-            setBeans(0)
-        }
-        console.log(beans)
-        return () => {mounted = false}
-    },[beans])
-    useEffect(()=>{
-        let mounted = true
-        console.log("i will run when the page first loads")
-        if(mounted)
-            setLoading(true)
-        setTimeout(function() {
-            if(mounted) setLoading(false)
-            console.log('done loading')
-        }, 5000)
-        return () => {mounted = false}
-    },[])
-    const apiRequest = async () => {
-        const apiURL = 'aurlhere';
-        await axios.get(apiURL).then((result) =>{
-            //do things
-        }).catch((error) =>{
-            console.log(error)
-        })
-    }
-    //loading animation - loading variable true then false, hide and unhide animation
     return (
         <>
-            {loading ? <div>LOADING</div> :<><Button variant='primary' onClick={() => {setBeans(beans+1)}}>click to add a bean</Button>
-            <Newsfeed beans={beans}/>
-            <Weather beans = {beans}/></>}
+            <div class='pb-5'>
+                <div class='bg-primary bg-gradient px-3 py-5 text-light'>
+                    <Container>
+                        <p class='display-1 fw-bold'>
+                            We hate <span class='text-info'>ads</span>.
+                        </p>
+                        <p class='lead'>
+                           We really hate paying for things. Even worse than paying for things is a site riddled with advertisements that you can't block. That's why 
+                           IntramuralHub is committed to being a free, open-source website as long as it's around (we hope that's a while). You can contribute to the project <a class='text-info' href='https://github.com/kloovin112358/Intramural'>here</a>.
+                        </p>
+                    </Container>
+                </div>
+            </div>
         </>
     )
 }
