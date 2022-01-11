@@ -51,10 +51,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'im',
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'im'
+    # 'rest_auth',
+    # 'django.contrib.sites',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'rest_auth.registration'
 ]
 
 AUTH_USER_MODEL = 'core.CustomUser'
@@ -88,14 +94,30 @@ TEMPLATES = [
     },
 ]
 
+# AUTHENTICATION_BACKENDS = (    
+#     "django.contrib.auth.backends.ModelBackend",    
+#     "allauth.account.auth_backends.AuthenticationBackend",
+# )
+
+# SITE_ID = 1 
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_SESSION_REMEMBER = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_UNIQUE_EMAIL = True
+
 REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
+
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ),
 
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
 }
 
 WSGI_APPLICATION = 'app.wsgi.application'
